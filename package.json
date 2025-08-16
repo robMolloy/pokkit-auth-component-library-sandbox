@@ -11,7 +11,7 @@
     "remove-library": "yalc remove pokkit-auth-component-library",
     "add-library": "yalc add pokkit-auth-component-library",
     "update-library": "npm run remove-library && npm run add-library",
-    "update-library:watch": "node scripts/update-library-script.mjs",
+    "update-library:watch": "npm run add-library && node scripts/update-library-script.mjs",
     "kill-port": "kill -9 $(lsof -i:${PORT:?} -t | head -n 1)",
     "kill:db": "PORT=8090 npm run kill-port",
     "db:start": "./pocketbase-leader/pocketbase serve",
