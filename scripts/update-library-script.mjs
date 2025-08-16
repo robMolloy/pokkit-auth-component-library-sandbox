@@ -47,37 +47,9 @@ const handleChangeOrAdd = () => {
         console.log(`update-library-script.mjs:${/*LL*/ 59}`, stderr);
       });
     } catch (error) {
-      console.log(`update-library-script.mjs:${/*LL*/ 62}`, "not gooood");
+      console.log(`update-library-script.mjs:${/*LL*/ 62}`, "not gooood", error);
     }
   }, 1000);
-};
-
-const handleChangeOrAdd2 = () => {
-  console.log(`update-library-script.mjs:${/*LL*/ 39}`, sigFilePath);
-
-  const contentsResp = safeGetFileContents(".yalc/pokkit-auth-component-library/yalc.sig");
-  if (!contentsResp.success)
-    return console.log(`update-library-script.mjs:${/*LL*/ 43}`, "could not get file contents");
-
-  const currentSigValue = contentsResp.contents;
-  console.log(currentSigValue, sigValue, currentSigValue === sigValue);
-
-  if (sigValue === currentSigValue) return;
-  sigValue = currentSigValue;
-
-  try {
-    exec("npm run update-library", (error, stdout, stderr) => {
-      if (error) {
-        console.log(`update-library-script.mjs:${/*LL*/ 54}`, error);
-        return;
-      }
-
-      console.log(`update-library-script.mjs:${/*LL*/ 58}`, stdout);
-      console.log(`update-library-script.mjs:${/*LL*/ 59}`, stderr);
-    });
-  } catch (error) {
-    console.log(`update-library-script.mjs:${/*LL*/ 62}`, "not gooood");
-  }
 };
 
 watcher.on("change", handleChangeOrAdd);
