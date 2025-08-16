@@ -21,35 +21,28 @@ const watchFilePath = "yalc.lock";
 const watcher = chokidar.watch(watchFilePath);
 
 const handleChangeOrAdd = () => {
-  console.log(`update-library-script.mjs:${/*LL*/ 24}`, {});
+  const contentsResp = safeGetFileContents(sigFilePath);
+  if (!contentsResp.success)
+    return console.log(`update-library-script.mjs:${/*LL*/ 30}`, "could not get file contents");
 
-  setTimeout(() => {
-    console.log(`update-library-script.mjs:${/*LL*/ 27}`, {});
-    const contentsResp = safeGetFileContents(sigFilePath);
-    if (!contentsResp.success)
-      return console.log(`update-library-script.mjs:${/*LL*/ 30}`, "could not get file contents");
+  const currentSigValue = contentsResp.contents;
 
-    const currentSigValue = contentsResp.contents;
-    console.log(currentSigValue, sigValue, currentSigValue === sigValue);
+  if (sigValue === currentSigValue) return console.log("update not required");
+  console.log("update required");
 
-    if (sigValue === currentSigValue) return console.log("update not required");
-    sigValue = currentSigValue;
-    console.log("update required");
-
-    try {
-      exec("npm run add-library", (error, stdout, stderr) => {
-        if (error) {
-          console.log(`update-library-script.mjs:${/*LL*/ 54}`, error);
-          return;
-        }
-
-        console.log(`update-library-script.mjs:${/*LL*/ 58}`, stdout);
-        console.log(`update-library-script.mjs:${/*LL*/ 59}`, stderr);
-      });
-    } catch (error) {
-      console.log(`update-library-script.mjs:${/*LL*/ 62}`, "not gooood", error);
-    }
-  }, 1000);
+  sigValue = currentSigValue;
+  try {
+    exec("npm run add-library", (error, stdout, stderr) => {
+      if (error) {
+        console.log(`update-library-script.mjs:${/*LL*/ 54}`, error);
+        return;
+      }
+      if (stdout) console.log(`update-library-script.mjs:${/*LL*/ 58}`, stdout);
+      if (stderr) console.log(`update-library-script.mjs:${/*LL*/ 59}`, stderr);
+    });
+  } catch (error) {
+    console.log(`update-library-script.mjs:${/*LL*/ 62}`, "not gooood", error);
+  }
 };
 
 watcher.on("change", handleChangeOrAdd);
