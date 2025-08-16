@@ -42,3 +42,4 @@ pocketbase-leader/pb_data/*
 pocketbase-leader/pb_migrations/*
 
 */.firebase
+.yalc/*

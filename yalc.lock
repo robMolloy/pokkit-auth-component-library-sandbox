@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "pokkit-auth-component-library": {
+      "signature": "61f83bcf343513076f7db582da6ae383",
+      "file": true
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { TextInput } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { pb } from "@/config/pocketbaseConfig";
+import { SignUp59 } from "pokkit-auth-component-library";
 import { useState } from "react";
 
 interface AuthSigninProps {
@@ -31,6 +32,7 @@ export function AuthSignin({ onSignIn }: AuthSigninProps) {
 
   return (
     <form onSubmit={handleSignIn} className="flex flex-col gap-4">
+      <SignUp59 />
       <div>
         <Label htmlFor="email">Email</Label>
         <TextInput
