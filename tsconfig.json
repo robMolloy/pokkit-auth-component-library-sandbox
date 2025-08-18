@@ -16,12 +16,11 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-
     "module": "esnext",
     "noEmit": true,
 
     "moduleResolution": "node"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "scripts",  "**/pb_data/*"]
+  "exclude": ["node_modules", "scripts", "**/pb_data/*"]
 }

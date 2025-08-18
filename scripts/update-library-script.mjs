@@ -2,8 +2,6 @@ import { exec } from "child_process";
 import fs from "fs";
 import chokidar from "chokidar";
 
-console.log(`update-library-script.ts:${/*LL*/ 5}`, {});
-
 const safeGetFileContents = (filePath) => {
   try {
     const contents = fs.readFileSync(filePath, "utf8");
